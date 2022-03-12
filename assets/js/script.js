@@ -47,7 +47,7 @@ var screenReset = function(){
 // GAME OVER FUNCTION
 var gameOver = function(){
     screenReset();
-    alert("The game has ended!");
+    //alert("The game has ended!");
     
     var mainContentElement = document.getElementById("main-content");
 
@@ -58,6 +58,11 @@ var gameOver = function(){
     var gameOverMsg = document.createElement("p");
     gameOverMsg.textContent = `Your final score is: ${score}`;
     mainContentElement.appendChild(gameOverMsg);
+
+    var scoreForm = document.createElement("form");
+    scoreForm.setAttribute("id","score-form");
+    scoreForm.setAttribute("class","score-form");
+    mainContentElement.appendChild(scoreForm);
 
 };
 
@@ -121,7 +126,7 @@ var game = function() {
 
         if (chosenAnswer.dataset.answer === "correct"){
             
-            alert("Correct answer!");
+            //alert("Correct answer!");
             x++;
             if (x<allQuestions.length){
                 game();
@@ -135,14 +140,14 @@ var game = function() {
         }
         else {
             
-            alert("Wrong answer!");
+            //alert("Wrong answer!");
             x++;
             if (x<allQuestions.length){
                 game();
                 answerMessage("Incorrect Answer!");
             } else {
                 gameOver();
-                answerMessage("Correct Answer!");
+                answerMessage("Incorrect Answer!");
             }
             
         };
