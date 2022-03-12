@@ -57,3 +57,16 @@ li {
     
     order: 2;
 }
+
+#game-over-msg-title{
+    order: 1;
+}
+#game-over-msg{
+    order: 2;
+}
+#final-score{
+    order: 3;
+}
+#score-form{
+    order: 4;
+}

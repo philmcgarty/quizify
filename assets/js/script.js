@@ -29,21 +29,23 @@ var questionAndAnswers4 = {
 
 var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers3, questionAndAnswers4];
 
+//var for counting through questions
 var x = 0;
 
 var score = 0;
-
+var timerScore = 0;
 var timer = 0;
 
+var gameEnded = false;
+
 var body = document.body;
-//setup header 
+// setup header 
 var headerElement = document.createElement("header");
 body.appendChild(headerElement);
-//setup main tag
+// setup main tag
 var mainElement = document.createElement("main");
 body.appendChild(mainElement);
 mainElement.setAttribute("id","main-element");
-
 // setup highscores button in header
 var viewHighScores = document.createElement("p");
 viewHighScores.textContent = "View high scores";
@@ -54,8 +56,7 @@ timerText.textContent = `Time: ${timer}`;
 headerElement.appendChild(timerText);
 
 
-
-//RESET MAIN AREA OF SCREEN
+//RESET MAIN AREA OF SCREEN FUNCTION
 var screenReset = function(){
     var clearScreen = document.getElementById("main-content");
     clearScreen.remove();
@@ -66,25 +67,40 @@ var screenReset = function(){
     mainContent.setAttribute("class","main-content");   
 };
 
+
+
+
+
+
 // GAME OVER FUNCTION
 var gameOver = function(){
     screenReset();
     //alert("The game has ended!");
+    gameEnded = true;
     
-    var mainContentElement = document.getElementById("main-content");
+    var mainContent = document.getElementById("main-content");
 
     var gameOverMsgTitle = document.createElement("h3");
+    gameOverMsgTitle.setAttribute("id", "game-over-msg-title");
     gameOverMsgTitle.textContent = "Game Over Man!";
-    mainContentElement.appendChild(gameOverMsgTitle);
+    mainContent.appendChild(gameOverMsgTitle);
 
     var gameOverMsg = document.createElement("p");
-    gameOverMsg.textContent = `Your final score is: ${score}`;
-    mainContentElement.appendChild(gameOverMsg);
+    gameOverMsg.setAttribute("id", "game-over-msg")
+    gameOverMsg.textContent = `Correct Answers: ${score} x Time Bonus: ${timer}`;
+    mainContent.appendChild(gameOverMsg);
+
+    var finalScore = score*timer;
+
+    var finalScoreText = document.createElement("h4");
+    finalScoreText.setAttribute("id","final-score");
+    finalScoreText.textContent = `Your Final Score: ${finalScore}`;
+    mainContent.appendChild(finalScoreText);   
 
     var scoreForm = document.createElement("form");
     scoreForm.setAttribute("id","score-form");
     scoreForm.setAttribute("class","score-form");
-    mainContentElement.appendChild(scoreForm);
+    mainContent.appendChild(scoreForm);
 
 };
 
@@ -164,12 +180,12 @@ var game = function() {
             x++;
             if (x<allQuestions.length){
                 timer = timer-10;
-                timerText.textContent = `Time: ${timer}`;
+                //timerText.textContent = `Time: ${timer}`;
                 game();
                 answerMessage("Incorrect Answer!");
             } else {
                 timer = timer-10;
-                timerText.textContent = `Time: ${timer}`;
+                //timerText.textContent = `Time: ${timer}`;
                 gameOver();
                 answerMessage("Incorrect Answer!");
             }           
@@ -177,6 +193,27 @@ var game = function() {
     });    
 };
 
+
+//TIMER COUNTDOWN FUNCTION
+function timeCounter(){
+    game();
+    var countdown =setInterval(function(){
+    
+        if (timer<=0 || gameEnded === true){
+            timerText.textContent = `Time: ${timer}`;
+            if (timer<=0){
+                timer=1;
+            };
+            timerScore = timer;
+            clearInterval(countdown);
+            gameOver();
+            
+        } else {
+            timerText.textContent = `Time: ${timer}`;
+            timer--;
+        }
+    }, 1000);
+}
 
 // START SCREEN FUNCTION
 var startScreen = function() {
@@ -202,7 +239,9 @@ var startScreen = function() {
     mainContent.appendChild(instructions);
     mainContent.appendChild(startButton);  
     //ON BUTTON CLICK GOES TO GAME
-    document.getElementById("start-button").addEventListener("click", game);   
+    document.getElementById("start-button").addEventListener("click", timeCounter);
+    timer = 30;
+       
 };
 
 // FUNCTION CALL TO BEGIN APP
