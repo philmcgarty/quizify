@@ -29,6 +29,81 @@ var questionAndAnswers4 = {
 
 var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers3, questionAndAnswers4];
 
+
+//headerElement.appendChild(test2);
+var screenReset = function(resetId){
+    var clearScreen = document.getElementById("start-page");
+    clearScreen.remove();
+    mainElement = document.getElementById("main-holder");
+    var mainContentElement = document.createElement("div");
+    mainElement.appendChild(mainContentElement);
+    mainContentElement.setAttribute("id",resetId);
+    mainContentElement.setAttribute("class","main-content");
+};
+
+
+var game = function() {
+    alert("Start Game?");
+    // var clearScreen = document.getElementById("start-page");
+    // clearScreen.remove();
+    // mainElement = document.getElementById("main-holder");
+    // var mainContentElement = document.createElement("div");
+    // mainElement.appendChild(mainContentElement);
+
+    
+    // mainContentElement.setAttribute("id","question-page");
+    // mainContentElement.setAttribute("class","main-content");
+    screenReset("question-page");
+};
+
+var startScreen = function() {
+    var timer = 0;
+
+    var body = document.body;
+    
+    var headerElement = document.createElement("header");
+    body.appendChild(headerElement);
+
+    var mainElement = document.createElement("main");
+    body.appendChild(mainElement);
+    mainElement.setAttribute("id","main-holder");
+
+    var mainContentElement = document.createElement("div");
+    mainElement.appendChild(mainContentElement);
+    mainContentElement.setAttribute("id","start-page");
+    mainContentElement.setAttribute("class","main-content");
+
+    var viewHighScores = document.createElement("p");
+    viewHighScores.textContent = "View high scores";
+
+    var timerText = document.createElement("p");
+    timerText.textContent = `Time: ${timer}`;
+
+    headerElement.appendChild(viewHighScores);
+    headerElement.appendChild(timerText);
+
+    var heading = document.createElement("h1");
+    heading.textContent = "Coding Quiz Challenge";
+
+    var instructions = document.createElement("p");
+    instructions.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
+    
+    var startButton = document.createElement("h2");
+    startButton.textContent = "Start Quiz";
+    startButton.setAttribute("id","start-button");
+    startButton.setAttribute("class", "start-button");
+
+
+    mainContentElement.appendChild(heading);
+    mainContentElement.appendChild(instructions);
+    mainContentElement.appendChild(startButton);
+
+    document.getElementById("start-button").addEventListener("click", game);
+
+};
+
+startScreen();
+
 // TO DO
 // Start Screen Function
 //      * Displays heading, message, and start quiz button

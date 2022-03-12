@@ -1,5 +1,47 @@
+/* STYLE RESETS */
+*{
+    border: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: black;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* END OF STYLE RESETS */
+
 header {
     display:flex;
     justify-content: space-between;
     padding: 30px 40px;
+}
+
+main {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: beige;
+    padding: 30px;
+    
+}
+
+.main-content {
+    background-color: azure;
+    padding: 30px;
+    width: 50%;
+    min-width: 400px;
+    text-align: center;
+}
+
+/* Start Button */
+#start-button {
+    background-color: purple;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
 }
