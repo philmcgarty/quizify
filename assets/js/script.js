@@ -31,6 +31,8 @@ var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers
 
 var x = 0;
 
+var score = 0;
+
 //RESET MAIN AREA OF SCREEN
 var screenReset = function(){
     var clearScreen = document.getElementById("main-content");
@@ -46,8 +48,16 @@ var screenReset = function(){
 var gameOver = function(){
     screenReset();
     alert("The game has ended!");
-     
-      
+    
+    var mainContentElement = document.getElementById("main-content");
+
+    var gameOverMsgTitle = document.createElement("h3");
+    gameOverMsgTitle.textContent = "Game Over Man!";
+    mainContentElement.appendChild(gameOverMsgTitle);
+
+    var gameOverMsg = document.createElement("p");
+    gameOverMsg.textContent = `Your final score is: ${score}`;
+    mainContentElement.appendChild(gameOverMsg);
 
 };
 
@@ -116,9 +126,11 @@ var game = function() {
             if (x<allQuestions.length){
                 game();
                 answerMessage("Correct Answer!");
+                score++;
             } else {
                 gameOver();
                 answerMessage("Correct Answer!");
+                score++;
             };
         }
         else {
@@ -145,18 +157,6 @@ var game = function() {
 // Create text
 // Display text
 // overwrite text after a second
-
-// Script for making something disappear after 2 seconds
-
-/* <p id="test">Wait 5 seconds for the greeting:</p>
-
-<script>
-var aTimeout = setTimeout(aGreeting, 2000);
-
-function aGreeting() {
-	document.getElementById("test").innerHTML ="";
-};
-</script> */
 
 
 // START SCREEN FUNCTION
