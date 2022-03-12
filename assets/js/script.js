@@ -33,15 +33,37 @@ var x = 0;
 
 var score = 0;
 
+var timer = 0;
+
+var body = document.body;
+//setup header 
+var headerElement = document.createElement("header");
+body.appendChild(headerElement);
+//setup main tag
+var mainElement = document.createElement("main");
+body.appendChild(mainElement);
+mainElement.setAttribute("id","main-element");
+
+// setup highscores button in header
+var viewHighScores = document.createElement("p");
+viewHighScores.textContent = "View high scores";
+headerElement.appendChild(viewHighScores);
+// setup timer in header
+var timerText = document.createElement("p");
+timerText.textContent = `Time: ${timer}`;
+headerElement.appendChild(timerText);
+
+
+
 //RESET MAIN AREA OF SCREEN
 var screenReset = function(){
     var clearScreen = document.getElementById("main-content");
     clearScreen.remove();
-    mainElement = document.getElementById("main-holder");
-    var mainContentElement = document.createElement("div");
-    mainElement.appendChild(mainContentElement);
-    mainContentElement.setAttribute("id","main-content");
-    mainContentElement.setAttribute("class","main-content");   
+    //mainElement = document.getElementById("main-holder");
+    var mainContent = document.createElement("div");
+    mainElement.appendChild(mainContent);
+    mainContent.setAttribute("id","main-content");
+    mainContent.setAttribute("class","main-content");   
 };
 
 // GAME OVER FUNCTION
@@ -72,16 +94,15 @@ var answerMessage = function (message) {
     if (checkExist){
         var feedback = document.getElementById("feedback");
         feedback.textContent = message;
-        feedback.setAttribute("id","feedback");
-        feedback.setAttribute("class","feedback");
-
+        //feedback.setAttribute("id","feedback");
+        //feedback.setAttribute("class","feedback");
     } else {
         var feedback = document.createElement("h3");
         feedback.textContent = message;
         feedback.setAttribute("id","feedback");
         feedback.setAttribute("class","feedback");
-        var mainHolder = document.getElementById("main-holder");
-        mainHolder.appendChild(feedback);
+        //var mainHolder = document.getElementById("main-holder");
+        mainElement.appendChild(feedback);
     }
 };
 
@@ -94,11 +115,11 @@ var game = function() {
     var questionTitle = document.createElement("h2");
     questionTitle.textContent = allQuestions[x].question;
     
-    var mainContentElement = document.getElementById("main-content");
-    mainContentElement.appendChild(questionTitle);
+    var mainContent = document.getElementById("main-content");
+    mainContent.appendChild(questionTitle);
     
     var questionList = document.createElement("ul");
-    mainContentElement.appendChild(questionList);
+    mainContent.appendChild(questionList);
     
     var answerListItem1 = document.createElement("li");
     answerListItem1.textContent = allQuestions[x].ans1[0];
@@ -129,90 +150,65 @@ var game = function() {
             //alert("Correct answer!");
             x++;
             if (x<allQuestions.length){
+                score++;
                 game();
-                answerMessage("Correct Answer!");
-                score++;
+                answerMessage("Correct Answer!");   
             } else {
-                gameOver();
-                answerMessage("Correct Answer!");
                 score++;
+                gameOver();
+                answerMessage("Correct Answer!");              
             };
         }
-        else {
-            
+        else {           
             //alert("Wrong answer!");
             x++;
             if (x<allQuestions.length){
+                timer = timer-10;
+                timerText.textContent = `Time: ${timer}`;
                 game();
                 answerMessage("Incorrect Answer!");
             } else {
+                timer = timer-10;
+                timerText.textContent = `Time: ${timer}`;
                 gameOver();
                 answerMessage("Incorrect Answer!");
-            }
-            
+            }           
         };
-
     });    
 };
 
 
-
-
-// Right/Wrong answer function
-// Create text
-// Display text
-// overwrite text after a second
-
-
 // START SCREEN FUNCTION
 var startScreen = function() {
-    var timer = 0;
-
-    var body = document.body;
+    // setup content div
+    var mainContent = document.createElement("div");
+    mainElement.appendChild(mainContent);
+    mainContent.setAttribute("id","main-content");
+    mainContent.setAttribute("class","main-content");
     
-    var headerElement = document.createElement("header");
-    body.appendChild(headerElement);
-
-    var mainElement = document.createElement("main");
-    body.appendChild(mainElement);
-    mainElement.setAttribute("id","main-holder");
-
-    var mainContentElement = document.createElement("div");
-    mainElement.appendChild(mainContentElement);
-    mainContentElement.setAttribute("id","main-content");
-    mainContentElement.setAttribute("class","main-content");
-
-    var viewHighScores = document.createElement("p");
-    viewHighScores.textContent = "View high scores";
-
-    var timerText = document.createElement("p");
-    timerText.textContent = `Time: ${timer}`;
-
-    headerElement.appendChild(viewHighScores);
-    headerElement.appendChild(timerText);
-
+    // setup start page heading
     var heading = document.createElement("h1");
     heading.textContent = "Coding Quiz Challenge";
-
+    // setup instructions text
     var instructions = document.createElement("p");
     instructions.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
-    
+    //setup start button
     var startButton = document.createElement("h2");
     startButton.textContent = "Start Quiz";
     startButton.setAttribute("id","start-button");
     startButton.setAttribute("class", "start-button");
-
-    mainContentElement.appendChild(heading);
-    mainContentElement.appendChild(instructions);
-    mainContentElement.appendChild(startButton);  
-
-    document.getElementById("start-button").addEventListener("click", game);
-    
+    //populate start page content into mainContent div
+    mainContent.appendChild(heading);
+    mainContent.appendChild(instructions);
+    mainContent.appendChild(startButton);  
     //ON BUTTON CLICK GOES TO GAME
+    document.getElementById("start-button").addEventListener("click", game);   
 };
 
 // FUNCTION CALL TO BEGIN APP
 startScreen();
+
+
 
 // TO DO
 // Start Screen Function ✅
