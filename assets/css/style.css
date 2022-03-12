@@ -27,7 +27,7 @@ main {
     align-items: center;
     background-color: beige;
     padding: 30px;
-    
+    flex-direction: column;    
 }
 
 .main-content {
@@ -36,6 +36,7 @@ main {
     width: 50%;
     min-width: 400px;
     text-align: center;
+    order: 1;
 }
 
 /* Start Button */
@@ -50,4 +51,9 @@ li {
     border: black solid 2px;
     padding: 10px;
     margin: 5px;
+}
+
+.feedback {
+    
+    order: 2;
 }

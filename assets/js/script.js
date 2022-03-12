@@ -30,6 +30,7 @@ var questionAndAnswers4 = {
 var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers3, questionAndAnswers4];
 
 var x = 0;
+
 //RESET MAIN AREA OF SCREEN
 var screenReset = function(){
     var clearScreen = document.getElementById("main-content");
@@ -41,10 +42,39 @@ var screenReset = function(){
     mainContentElement.setAttribute("class","main-content");   
 };
 
-
-var game = function() {
+// GAME OVER FUNCTION
+var gameOver = function(){
     screenReset();
+    alert("The game has ended!");
+     
+      
+
+};
+
+// DISPLAY IF ANSWERED QUESTION RIGHT OR WRONG
+var answerMessage = function (message) {
+    var checkExist = document.getElementById("feedback");
+    if (checkExist){
+        var feedback = document.getElementById("feedback");
+        feedback.textContent = message;
+        feedback.setAttribute("id","feedback");
+        feedback.setAttribute("class","feedback");
+
+    } else {
+        var feedback = document.createElement("h3");
+        feedback.textContent = message;
+        feedback.setAttribute("id","feedback");
+        feedback.setAttribute("class","feedback");
+        var mainHolder = document.getElementById("main-holder");
+        mainHolder.appendChild(feedback);
+    }
+};
+
+
+// GAME FUNCTION - Cycles through questions
+var game = function() {
     
+    screenReset();
     
     var questionTitle = document.createElement("h2");
     questionTitle.textContent = allQuestions[x].question;
@@ -77,35 +107,59 @@ var game = function() {
 
     questionList.addEventListener("click", function(event) {
         var chosenAnswer = event.target;
-        console.log(chosenAnswer);
+        //console.log(chosenAnswer);
 
         if (chosenAnswer.dataset.answer === "correct"){
+            
             alert("Correct answer!");
             x++;
-            
-            game();
+            if (x<allQuestions.length){
+                game();
+                answerMessage("Correct Answer!");
+            } else {
+                gameOver();
+                answerMessage("Correct Answer!");
+            };
         }
         else {
+            
             alert("Wrong answer!");
             x++;
-            
-            game();
+            if (x<allQuestions.length){
+                game();
+                answerMessage("Incorrect Answer!");
+            } else {
+                gameOver();
+                answerMessage("Correct Answer!");
+            }
             
         };
+
     });    
 };
 
-// var firstQuestion = function(){
-//     var clearScreen = document.getElementById("start-page");
-//     clearScreen.remove();
-//     mainElement = document.getElementById("main-holder");
-//     var mainContentElement = document.createElement("div");
-//     mainElement.appendChild(mainContentElement);
-//     mainContentElement.setAttribute("id","question-page");
-//     mainContentElement.setAttribute("class","main-content");
-// }
 
 
+
+// Right/Wrong answer function
+// Create text
+// Display text
+// overwrite text after a second
+
+// Script for making something disappear after 2 seconds
+
+/* <p id="test">Wait 5 seconds for the greeting:</p>
+
+<script>
+var aTimeout = setTimeout(aGreeting, 2000);
+
+function aGreeting() {
+	document.getElementById("test").innerHTML ="";
+};
+</script> */
+
+
+// START SCREEN FUNCTION
 var startScreen = function() {
     var timer = 0;
 
@@ -143,30 +197,28 @@ var startScreen = function() {
     startButton.setAttribute("id","start-button");
     startButton.setAttribute("class", "start-button");
 
-
     mainContentElement.appendChild(heading);
     mainContentElement.appendChild(instructions);
-    mainContentElement.appendChild(startButton);
+    mainContentElement.appendChild(startButton);  
 
     document.getElementById("start-button").addEventListener("click", game);
-    alert("Start Game?");
     
-
-
+    //ON BUTTON CLICK GOES TO GAME
 };
 
+// FUNCTION CALL TO BEGIN APP
 startScreen();
 
 // TO DO
-// Start Screen Function
-//      * Displays heading, message, and start quiz button
-//      * Event handler for start quiz button
+// Start Screen Function ✅
+//      * Displays heading, message, and start quiz button ✅
+//      * Event handler for start quiz button ✅
 // Game Function
-//      * For loop to cycle through allQuestions array
-//      * Displays question as heading, and 4 answers in ul
-//      * Event listener for answer - identifies which answer clicked and whether right/wrong - minus time if wrong
+//      * Loop to cycle through allQuestions array ✅
+//      * Displays question as heading, and 4 answers in ul ✅
+//      * Event listener for answer - identifies which answer clicked and whether right/wrong ✅ - minus time if wrong
 //      * Displays right/wrong for 2 seconds
-//      * Replaces question/answers with next question/answers until allQuestions cycled through
+//      * Replaces question/answers with next question/answers until allQuestions cycled through ✅
 // Final Score Function
 //      * Calculate final score
 //      * Displays final score
