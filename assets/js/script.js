@@ -1,60 +1,110 @@
 var questionAndAnswers1 = {
     question: "Which answer is correct1?",
     ans1: ["correct answer1", "correct"],
-    ans2: ["incorrect answer", "incorrect"],
-    ans3: ["incorrect answer", "incorrect"],
-    ans4: ["incorrect answer", "incorrect"]
+    ans2: ["incorrect answer1", "incorrecta"],
+    ans3: ["incorrect answer1", "incorrectb"],
+    ans4: ["incorrect answer1", "incorrectc"]
 };
 var questionAndAnswers2 = {
     question: "Which answer is correct2?",
     ans1: ["correct answer2", "correct"],
-    ans2: ["incorrect answer", "incorrect"],
-    ans3: ["incorrect answer", "incorrect"],
-    ans4: ["incorrect answer", "incorrect"]
+    ans2: ["incorrect answer2", "incorrecta"],
+    ans3: ["incorrect answer2", "incorrectb"],
+    ans4: ["incorrect answer2", "incorrectc"]
 };
 var questionAndAnswers3 = {
     question: "Which answer is correct3?",
     ans1: ["correct answer3", "correct"],
-    ans2: ["incorrect answer", "incorrect"],
-    ans3: ["incorrect answer", "incorrect"],
-    ans4: ["incorrect answer", "incorrect"]
+    ans2: ["incorrect answer3", "incorrecta"],
+    ans3: ["incorrect answer3", "incorrectb"],
+    ans4: ["incorrect answer3", "incorrectc"]
 };
 var questionAndAnswers4 = {
     question: "Which answer is correct4?",
     ans1: ["correct answer4", "correct"],
-    ans2: ["incorrect answer", "incorrect"],
-    ans3: ["incorrect answer", "incorrect"],
-    ans4: ["incorrect answer", "incorrect"]
+    ans2: ["incorrect answer4", "incorrecta"],
+    ans3: ["incorrect answer4", "incorrectb"],
+    ans4: ["incorrect answer4", "incorrectc"]
 };
 
 var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers3, questionAndAnswers4];
 
-
-//headerElement.appendChild(test2);
-var screenReset = function(resetId){
-    var clearScreen = document.getElementById("start-page");
+var x = 0;
+//RESET MAIN AREA OF SCREEN
+var screenReset = function(){
+    var clearScreen = document.getElementById("main-content");
     clearScreen.remove();
     mainElement = document.getElementById("main-holder");
     var mainContentElement = document.createElement("div");
     mainElement.appendChild(mainContentElement);
-    mainContentElement.setAttribute("id",resetId);
-    mainContentElement.setAttribute("class","main-content");
+    mainContentElement.setAttribute("id","main-content");
+    mainContentElement.setAttribute("class","main-content");   
 };
 
 
 var game = function() {
-    alert("Start Game?");
-    // var clearScreen = document.getElementById("start-page");
-    // clearScreen.remove();
-    // mainElement = document.getElementById("main-holder");
-    // var mainContentElement = document.createElement("div");
-    // mainElement.appendChild(mainContentElement);
-
+    screenReset();
     
-    // mainContentElement.setAttribute("id","question-page");
-    // mainContentElement.setAttribute("class","main-content");
-    screenReset("question-page");
+    
+    var questionTitle = document.createElement("h2");
+    questionTitle.textContent = allQuestions[x].question;
+    
+    var mainContentElement = document.getElementById("main-content");
+    mainContentElement.appendChild(questionTitle);
+    
+    var questionList = document.createElement("ul");
+    mainContentElement.appendChild(questionList);
+    
+    var answerListItem1 = document.createElement("li");
+    answerListItem1.textContent = allQuestions[x].ans1[0];
+    answerListItem1.setAttribute("data-answer",allQuestions[x].ans1[1]);   
+    questionList.appendChild(answerListItem1);
+
+    var answerListItem2 = document.createElement("li");
+    answerListItem2.textContent = allQuestions[x].ans2[0];
+    answerListItem2.setAttribute("data-answer",allQuestions[x].ans2[1]);
+    questionList.appendChild(answerListItem2);
+
+    var answerListItem3 = document.createElement("li");
+    answerListItem3.textContent = allQuestions[x].ans3[0];
+    answerListItem3.setAttribute("data-answer",allQuestions[x].ans3[1]);
+    questionList.appendChild(answerListItem3);
+
+    var answerListItem4 = document.createElement("li");
+    answerListItem4.textContent = allQuestions[x].ans4[0];
+    answerListItem4.setAttribute("data-answer",allQuestions[x].ans4[1]);
+    questionList.appendChild(answerListItem4);
+
+    questionList.addEventListener("click", function(event) {
+        var chosenAnswer = event.target;
+        console.log(chosenAnswer);
+
+        if (chosenAnswer.dataset.answer === "correct"){
+            alert("Correct answer!");
+            x++;
+            
+            game();
+        }
+        else {
+            alert("Wrong answer!");
+            x++;
+            
+            game();
+            
+        };
+    });    
 };
+
+// var firstQuestion = function(){
+//     var clearScreen = document.getElementById("start-page");
+//     clearScreen.remove();
+//     mainElement = document.getElementById("main-holder");
+//     var mainContentElement = document.createElement("div");
+//     mainElement.appendChild(mainContentElement);
+//     mainContentElement.setAttribute("id","question-page");
+//     mainContentElement.setAttribute("class","main-content");
+// }
+
 
 var startScreen = function() {
     var timer = 0;
@@ -70,7 +120,7 @@ var startScreen = function() {
 
     var mainContentElement = document.createElement("div");
     mainElement.appendChild(mainContentElement);
-    mainContentElement.setAttribute("id","start-page");
+    mainContentElement.setAttribute("id","main-content");
     mainContentElement.setAttribute("class","main-content");
 
     var viewHighScores = document.createElement("p");
@@ -99,6 +149,9 @@ var startScreen = function() {
     mainContentElement.appendChild(startButton);
 
     document.getElementById("start-button").addEventListener("click", game);
+    alert("Start Game?");
+    
+
 
 };
 

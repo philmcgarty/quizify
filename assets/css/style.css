@@ -45,3 +45,9 @@ main {
     padding: 20px;
     border-radius: 5px;
 }
+
+li {
+    border: black solid 2px;
+    padding: 10px;
+    margin: 5px;
+}
