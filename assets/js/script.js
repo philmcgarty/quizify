@@ -35,6 +35,8 @@ var x = 0;
 var score = 0;
 var timerScore = 0;
 var timer = 0;
+var finalScore = 0;
+var highscoreArray = [];
 
 var gameEnded = false;
 
@@ -68,6 +70,23 @@ var screenReset = function(){
 };
 
 
+// SCORE SAVING FUNCTION
+var submitScore = function(event){
+    event.preventDefault();
+    var submitName = document.querySelector("#enter-name");
+    var highscore = {
+        uName: submitName.value,
+        score: finalScore
+    };
+    highscoreArray = localStorage.getItem("highscores");
+    highscoreArray = JSON.parse(highscoreArray);
+    highscoreArray.push(highscore);
+
+    highscoreArray = JSON.stringify(highscoreArray);
+    localStorage.setItem("highscores", highscoreArray);  
+
+    
+};
 
 
 
@@ -90,7 +109,7 @@ var gameOver = function(){
     gameOverMsg.textContent = `Correct Answers: ${score} x Time Bonus: ${timer}`;
     mainContent.appendChild(gameOverMsg);
 
-    var finalScore = score*timer;
+    finalScore = score*timer;
 
     var finalScoreText = document.createElement("h4");
     finalScoreText.setAttribute("id","final-score");
@@ -101,7 +120,24 @@ var gameOver = function(){
     scoreForm.setAttribute("id","score-form");
     scoreForm.setAttribute("class","score-form");
     mainContent.appendChild(scoreForm);
-
+    // create input field and label
+    var inputLabel = document.createElement("label");
+    inputLabel.setAttribute("for","enter-name");
+    inputLabel.textContent = "Enter initials:";
+    scoreForm.appendChild(inputLabel);
+    var enterName = document.createElement("input");
+    enterName.setAttribute("name","enter-name");
+    enterName.setAttribute("maxlength","3");
+    enterName.setAttribute("id","enter-name");
+    scoreForm.appendChild(enterName);
+    // create submit button
+    var submitBtn = document.createElement("button");
+    submitBtn.setAttribute("id","submit-btn");
+    submitBtn.setAttribute("type", "submit");
+    submitBtn.textContent = "Submit";
+    scoreForm.appendChild(submitBtn);
+    // click listener on submit button
+    scoreForm.addEventListener("submit", submitScore);
 };
 
 // DISPLAY IF ANSWERED QUESTION RIGHT OR WRONG
@@ -257,11 +293,11 @@ startScreen();
 //      * Loop to cycle through allQuestions array ✅
 //      * Displays question as heading, and 4 answers in ul ✅
 //      * Event listener for answer - identifies which answer clicked and whether right/wrong ✅ - minus time if wrong
-//      * Displays right/wrong for 2 seconds
+//      * Displays right/wrong for 0.5 seconds
 //      * Replaces question/answers with next question/answers until allQuestions cycled through ✅
 // Final Score Function
-//      * Calculate final score
-//      * Displays final score
+//      * Calculate final score ✅
+//      * Displays final score ✅
 //      * Asks user to enter initials
 //      * Submit button with even listener
 //      * Save score/initials to local storage when submit clicked

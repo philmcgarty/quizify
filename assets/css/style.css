@@ -58,7 +58,21 @@ li {
     order: 2;
 }
 
-#game-over-msg-title{
+#enter-name {
+    border: black 2px solid;
+    width: 60px;
+    margin: 0 10px 0 10px;
+}
+
+#submit-btn {
+    background-color: purple;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+/* #game-over-msg-title{
     order: 1;
 }
 #game-over-msg{
@@ -69,4 +83,4 @@ li {
 }
 #score-form{
     order: 4;
-}
+} */
