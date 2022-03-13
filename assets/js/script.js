@@ -79,11 +79,17 @@ var submitScore = function(event){
         score: finalScore
     };
     highscoreArray = localStorage.getItem("highscores");
-    highscoreArray = JSON.parse(highscoreArray);
-    highscoreArray.push(highscore);
 
+    if (highscoreArray){
+        highscoreArray = JSON.parse(highscoreArray);   
+    } else {
+        highscoreArray = [];    
+    };
+
+    highscoreArray.push(highscore);
     highscoreArray = JSON.stringify(highscoreArray);
-    localStorage.setItem("highscores", highscoreArray);  
+    localStorage.setItem("highscores", highscoreArray);
+      
 
     
 };
