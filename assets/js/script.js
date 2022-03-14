@@ -70,6 +70,14 @@ var screenReset = function(){
 };
 
 
+// HIGHSCORE SCREEN
+var highscoreDisplay= function(){
+    //alert("Look at those scores!");
+    screenReset();
+    
+};
+
+
 // SCORE SAVING FUNCTION
 var submitScore = function(event){
     event.preventDefault();
@@ -89,11 +97,9 @@ var submitScore = function(event){
     highscoreArray.push(highscore);
     highscoreArray = JSON.stringify(highscoreArray);
     localStorage.setItem("highscores", highscoreArray);
-      
-
     
+    highscoreDisplay();
 };
-
 
 
 
@@ -149,18 +155,20 @@ var gameOver = function(){
 // DISPLAY IF ANSWERED QUESTION RIGHT OR WRONG
 var answerMessage = function (message) {
     var checkExist = document.getElementById("feedback");
+
     if (checkExist){
         var feedback = document.getElementById("feedback");
         feedback.textContent = message;
-        //feedback.setAttribute("id","feedback");
-        //feedback.setAttribute("class","feedback");
+        feedback.style.display = "block";
+        setTimeout(function(){feedback.style.display = "none"}, 500); //got setTimeout from: https://www.codegrepper.com/code-examples/javascript/paragraph+to+disappear+after+5+secs+vanilla+js+w3schools      
     } else {
         var feedback = document.createElement("h3");
         feedback.textContent = message;
+        feedback.style.display = "block";
         feedback.setAttribute("id","feedback");
         feedback.setAttribute("class","feedback");
-        //var mainHolder = document.getElementById("main-holder");
         mainElement.appendChild(feedback);
+        setTimeout(function(){feedback.style.display = "none"}, 500);
     }
 };
 
@@ -259,6 +267,14 @@ function timeCounter(){
 
 // START SCREEN FUNCTION
 var startScreen = function() {
+    // resets all counter variables
+    x = 0;
+    score = 0;
+    timerScore = 0;
+    timer = 0;
+    finalScore = 0;
+    gameEnded = false;
+    
     // setup content div
     var mainContent = document.createElement("div");
     mainElement.appendChild(mainContent);
@@ -298,15 +314,15 @@ startScreen();
 // Game Function
 //      * Loop to cycle through allQuestions array ✅
 //      * Displays question as heading, and 4 answers in ul ✅
-//      * Event listener for answer - identifies which answer clicked and whether right/wrong ✅ - minus time if wrong
-//      * Displays right/wrong for 0.5 seconds
+//      * Event listener for answer - identifies which answer clicked and whether right/wrong ✅ - minus time if wrong ✅
+//      * Displays right/wrong for 0.5 seconds ✅
 //      * Replaces question/answers with next question/answers until allQuestions cycled through ✅
-// Final Score Function
+// Final Score Function ✅
 //      * Calculate final score ✅
 //      * Displays final score ✅
-//      * Asks user to enter initials
-//      * Submit button with even listener
-//      * Save score/initials to local storage when submit clicked
+//      * Asks user to enter initials ✅
+//      * Submit button with even listener ✅
+//      * Save score/initials to local storage when submit clicked ✅
 // High Score Function
 //      * Recalls highscors/initials from local storage
 //      * Displays highscores/initials
