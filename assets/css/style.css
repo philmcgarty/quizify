@@ -39,6 +39,13 @@ main {
     order: 1;
 }
 
+/* Highscore button */
+#view-high-scores {
+    color: purple;
+
+}
+
+
 /* Start Button */
 #start-button {
     background-color: purple;
@@ -54,7 +61,6 @@ li {
 }
 
 .feedback {
-    
     order: 2;
 }
 
@@ -64,12 +70,13 @@ li {
     margin: 0 10px 0 10px;
 }
 
-#submit-btn {
+#submit-btn, #go-back-btn, #clear-scores-btn {
     background-color: purple;
     color: white;
     padding: 5px 10px;
     border-radius: 3px;
     font-size: 16px;
+    margin: 10px 10px;
 }
 
 /* #game-over-msg-title{

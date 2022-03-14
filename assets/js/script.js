@@ -51,11 +51,13 @@ mainElement.setAttribute("id","main-element");
 // setup highscores button in header
 var viewHighScores = document.createElement("p");
 viewHighScores.textContent = "View high scores";
+viewHighScores.setAttribute("id","view-high-scores")
 headerElement.appendChild(viewHighScores);
 // setup timer in header
 var timerText = document.createElement("p");
 timerText.textContent = `Time: ${timer}`;
 headerElement.appendChild(timerText);
+
 
 
 //RESET MAIN AREA OF SCREEN FUNCTION
@@ -69,11 +71,44 @@ var screenReset = function(){
     mainContent.setAttribute("class","main-content");   
 };
 
+//
+var gameReset = function(){
+    // remove content & return to start screen
+    var clearScreen = document.getElementById("main-content");
+    clearScreen.remove();
+    startScreen();
+};
+
+// CLEAR HIGH SCORES FROM LOCAL STORAGE
+var clearScores = function(){
+
+};
+
 
 // HIGHSCORE SCREEN
 var highscoreDisplay= function(){
     //alert("Look at those scores!");
     screenReset();
+    mainContent = document.getElementById("main-content")
+    var highscoreTitle = document.createElement("h2");
+    highscoreTitle.textContent = "Highscores";
+    mainContent.appendChild(highscoreTitle);
+    // "Go Back" button
+    var goBackBtn = document.createElement("button");
+    goBackBtn.textContent = "Go back";
+    goBackBtn.setAttribute("id","go-back-btn")
+    mainContent.appendChild(goBackBtn);
+    
+    document.getElementById("go-back-btn").addEventListener("click", gameReset);
+    
+    // "Clear Scores" button
+    var clearScoresBtn = document.createElement("button");
+    clearScoresBtn.textContent = "Clear highscores";
+    clearScoresBtn.setAttribute("id","clear-scores-btn");
+    mainContent.appendChild(clearScoresBtn);
+
+    document.getElementById("clear-scores-btn").addEventListener("click", clearScores);
+    
     
 };
 
@@ -160,7 +195,7 @@ var answerMessage = function (message) {
         var feedback = document.getElementById("feedback");
         feedback.textContent = message;
         feedback.style.display = "block";
-        setTimeout(function(){feedback.style.display = "none"}, 500); //got setTimeout from: https://www.codegrepper.com/code-examples/javascript/paragraph+to+disappear+after+5+secs+vanilla+js+w3schools      
+        setTimeout(function(){feedback.style.display = "none"}, 750); //got setTimeout from: https://www.codegrepper.com/code-examples/javascript/paragraph+to+disappear+after+5+secs+vanilla+js+w3schools      
     } else {
         var feedback = document.createElement("h3");
         feedback.textContent = message;
@@ -168,7 +203,7 @@ var answerMessage = function (message) {
         feedback.setAttribute("id","feedback");
         feedback.setAttribute("class","feedback");
         mainElement.appendChild(feedback);
-        setTimeout(function(){feedback.style.display = "none"}, 500);
+        setTimeout(function(){feedback.style.display = "none"}, 750);
     }
 };
 
@@ -275,6 +310,9 @@ var startScreen = function() {
     finalScore = 0;
     gameEnded = false;
     
+    document.getElementById("view-high-scores").addEventListener("click", highscoreDisplay);
+    
+
     // setup content div
     var mainContent = document.createElement("div");
     mainElement.appendChild(mainContent);
