@@ -39,6 +39,7 @@ var finalScore = 0;
 var highscoreArray = [];
 
 var gameEnded = false;
+var gameExit = false;
 
 var body = document.body;
 // setup header 
@@ -48,6 +49,12 @@ body.appendChild(headerElement);
 var mainElement = document.createElement("main");
 body.appendChild(mainElement);
 mainElement.setAttribute("id","main-element");
+// setup title
+var quizifyTitle = document.createElement("h1");
+quizifyTitle.textContent = "Quizify";
+quizifyTitle.setAttribute("class","quizify-title");
+headerElement.appendChild(quizifyTitle);
+
 // setup highscores button in header
 var viewHighScores = document.createElement("p");
 viewHighScores.textContent = "View high scores";
@@ -56,6 +63,7 @@ headerElement.appendChild(viewHighScores);
 // setup timer in header
 var timerText = document.createElement("p");
 timerText.textContent = `Time: ${timer}`;
+timerText.setAttribute("class","timer-text");
 headerElement.appendChild(timerText);
 
 
@@ -81,18 +89,44 @@ var gameReset = function(){
 
 // CLEAR HIGH SCORES FROM LOCAL STORAGE
 var clearScores = function(){
-
+    
+    if (confirm("Are you sure you want to delete the high scores?") === true){
+        highscoreArray = [];
+        highscoreArray = JSON.stringify(highscoreArray);
+        localStorage.setItem("highscores", highscoreArray);
+        highscoreDisplay();
+    } else {
+        highscoreDisplay();
+    }
+    
 };
 
 
 // HIGHSCORE SCREEN
 var highscoreDisplay= function(){
     //alert("Look at those scores!");
+    gameExit = true;
     screenReset();
     mainContent = document.getElementById("main-content")
     var highscoreTitle = document.createElement("h2");
     highscoreTitle.textContent = "Highscores";
     mainContent.appendChild(highscoreTitle);
+    
+    // display scores
+    var highscoreArray = localStorage.getItem("highscores");
+    if (!highscoreArray){
+        highscoreArray = [];
+    };
+    highscoreArray = JSON.parse(highscoreArray);
+    
+    highscoreArray.sort((a, b) => { return b.score - a.score;}); // Got this sorting code from: https://www.javascripttutorial.net/array/javascript-sort-an-array-of-objects/
+
+    for (i=0;i<highscoreArray.length;i++){
+        var highscoreLine = document.createElement("p");
+        highscoreLine.textContent = `${highscoreArray[i].uName} - ${highscoreArray[i].score}`;
+        mainContent.appendChild(highscoreLine);
+    };
+    
     // "Go Back" button
     var goBackBtn = document.createElement("button");
     goBackBtn.textContent = "Go back";
@@ -293,6 +327,11 @@ function timeCounter(){
             clearInterval(countdown);
             gameOver();
             
+        } else if (gameExit){
+            clearInterval(countdown);
+            timer = 0;
+            timerText.textContent = `Time: ${timer}`;
+
         } else {
             timerText.textContent = `Time: ${timer}`;
             timer--;
@@ -309,7 +348,8 @@ var startScreen = function() {
     timer = 0;
     finalScore = 0;
     gameEnded = false;
-    
+    gameExit = false;
+
     document.getElementById("view-high-scores").addEventListener("click", highscoreDisplay);
     
 
@@ -320,13 +360,13 @@ var startScreen = function() {
     mainContent.setAttribute("class","main-content");
     
     // setup start page heading
-    var heading = document.createElement("h1");
+    var heading = document.createElement("h2");
     heading.textContent = "Coding Quiz Challenge";
     // setup instructions text
     var instructions = document.createElement("p");
     instructions.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!"
     //setup start button
-    var startButton = document.createElement("h2");
+    var startButton = document.createElement("h3");
     startButton.textContent = "Start Quiz";
     startButton.setAttribute("id","start-button");
     startButton.setAttribute("class", "start-button");

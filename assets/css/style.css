@@ -18,20 +18,22 @@ ul {
 header {
     display:flex;
     justify-content: space-between;
-    padding: 30px 40px;
+    /* padding: 30px 40px; */
+    flex-wrap: wrap;
 }
+
 
 main {
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: beige;
+    /* background-color: beige; */
     padding: 30px;
     flex-direction: column;    
 }
 
 .main-content {
-    background-color: azure;
+    /* background-color: azure; */
     padding: 30px;
     width: 50%;
     min-width: 400px;
@@ -39,12 +41,29 @@ main {
     order: 1;
 }
 
+/* Title */
+.quizify-title {
+    width: 100%;
+    font-size: 40px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: black;
+    color: white;
+    padding: 30px 40px;
+    margin:0;
+}
+
 /* Highscore button */
 #view-high-scores {
     color: purple;
-
+    padding: 10px 40px;
+    margin: 0;
 }
-
+/* Timer */
+.timer-text {
+    padding: 10px 40px;
+    margin: 0;
+}
 
 /* Start Button */
 #start-button {
