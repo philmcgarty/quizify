@@ -1,30 +1,30 @@
 var questionAndAnswers1 = {
-    question: "Which answer is correct1?",
-    ans1: ["correct answer1", "correct"],
-    ans2: ["incorrect answer1", "incorrecta"],
-    ans3: ["incorrect answer1", "incorrectb"],
-    ans4: ["incorrect answer1", "incorrectc"]
+    question: "What is the naming convetion for variables in JavaScript",
+    ans1: ["Camel Case", "correct"],
+    ans2: ["Donkey Case", "incorrect"],
+    ans3: ["Cat Case", "incorrect"],
+    ans4: ["Suitcase", "incorrect"]
 };
 var questionAndAnswers2 = {
-    question: "Which answer is correct2?",
-    ans1: ["correct answer2", "correct"],
-    ans2: ["incorrect answer2", "incorrecta"],
-    ans3: ["incorrect answer2", "incorrectb"],
-    ans4: ["incorrect answer2", "incorrectc"]
+    question: "Which of the following is used as 'or' in a logical condition?",
+    ans1: ["&&", "incorrect"],
+    ans2: ["$$", "incorrect"],
+    ans3: ["//", "incorrect"],
+    ans4: ["||", "correct"]
 };
 var questionAndAnswers3 = {
-    question: "Which answer is correct3?",
-    ans1: ["correct answer3", "correct"],
-    ans2: ["incorrect answer3", "incorrecta"],
-    ans3: ["incorrect answer3", "incorrectb"],
-    ans4: ["incorrect answer3", "incorrectc"]
+    question: "Which of the following is NOT a variable type in JavaScript?",
+    ans1: ["String", "incorrect"],
+    ans2: ["Addition", "correct"],
+    ans3: ["Boolean", "incorrect"],
+    ans4: ["Array", "incorrect"]
 };
 var questionAndAnswers4 = {
-    question: "Which answer is correct4?",
-    ans1: ["correct answer4", "correct"],
-    ans2: ["incorrect answer4", "incorrecta"],
-    ans3: ["incorrect answer4", "incorrectb"],
-    ans4: ["incorrect answer4", "incorrectc"]
+    question: "When calling a function, what follows directly after the function name?",
+    ans1: ["[]", "incorrect"],
+    ans2: [";", "incorrect"],
+    ans3: ["()", "correct"],
+    ans4: ["''", "incorrect"]
 };
 
 var allQuestions = [questionAndAnswers1, questionAndAnswers2, questionAndAnswers3, questionAndAnswers4];
