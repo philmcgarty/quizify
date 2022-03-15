@@ -64,6 +64,11 @@ main {
     padding: 10px 40px;
     margin: 0;
 }
+#view-high-scores:hover {
+    background-color: purple;
+    color: white;
+}
+
 /* Timer */
 .timer-text {
     padding: 10px 40px;
@@ -78,10 +83,18 @@ main {
     border-radius: 5px;
 }
 
+#start-button:hover {
+    background-color: green;
+}
+
 li {
     border: black solid 2px;
     padding: 10px;
     margin: 5px;
+}
+
+li:hover {
+    background-color: bisque;
 }
 
 .feedback {
@@ -101,8 +114,16 @@ li {
     color: white;
     padding: 5px 10px;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 20px;
     margin: 10px 10px;
+}
+
+#submit-btn:hover, #go-back-btn:hover {
+    background-color: green;
+}
+
+#clear-scores-btn:hover {
+    background-color: red;
 }
 
 #final-score{
