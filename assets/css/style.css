@@ -44,13 +44,18 @@ main {
 /* Title */
 .quizify-title {
     width: 100%;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: bold;
     font-style: italic;
-    background-color: black;
+    background-image: linear-gradient(black,grey);
     color: white;
     padding: 30px 40px;
     margin:0;
+}
+
+/* Heading h2 */
+.heading {
+    font-size: 30px;
 }
 
 /* Highscore button */
@@ -81,6 +86,8 @@ li {
 
 .feedback {
     order: 2;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 #enter-name {
@@ -98,15 +105,18 @@ li {
     margin: 10px 10px;
 }
 
+#final-score{
+    font-size: 28px;
+}
+
+
 /* #game-over-msg-title{
     order: 1;
 }
 #game-over-msg{
     order: 2;
 }
-#final-score{
-    order: 3;
-}
+
 #score-form{
     order: 4;
 } */

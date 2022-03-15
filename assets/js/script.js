@@ -109,6 +109,7 @@ var highscoreDisplay= function(){
     screenReset();
     mainContent = document.getElementById("main-content")
     var highscoreTitle = document.createElement("h2");
+    highscoreTitle.setAttribute("class","heading");
     highscoreTitle.textContent = "Highscores";
     mainContent.appendChild(highscoreTitle);
     
@@ -151,10 +152,15 @@ var highscoreDisplay= function(){
 var submitScore = function(event){
     event.preventDefault();
     var submitName = document.querySelector("#enter-name");
+    
     var highscore = {
-        uName: submitName.value,
+        uName: submitName.value.toUpperCase(),
         score: finalScore
     };
+    if (highscore.uName === ""){
+        highscore.uName = "???";
+    }
+
     highscoreArray = localStorage.getItem("highscores");
 
     if (highscoreArray){
@@ -180,7 +186,8 @@ var gameOver = function(){
     
     var mainContent = document.getElementById("main-content");
 
-    var gameOverMsgTitle = document.createElement("h3");
+    var gameOverMsgTitle = document.createElement("h2");
+    gameOverMsgTitle.setAttribute("class", "heading");
     gameOverMsgTitle.setAttribute("id", "game-over-msg-title");
     gameOverMsgTitle.textContent = "Game Over Man!";
     mainContent.appendChild(gameOverMsgTitle);
@@ -192,7 +199,7 @@ var gameOver = function(){
 
     finalScore = score*timer;
 
-    var finalScoreText = document.createElement("h4");
+    var finalScoreText = document.createElement("h3");
     finalScoreText.setAttribute("id","final-score");
     finalScoreText.textContent = `Your Final Score: ${finalScore}`;
     mainContent.appendChild(finalScoreText);   
@@ -224,7 +231,7 @@ var gameOver = function(){
 // DISPLAY IF ANSWERED QUESTION RIGHT OR WRONG
 var answerMessage = function (message) {
     var checkExist = document.getElementById("feedback");
-
+    
     if (checkExist){
         var feedback = document.getElementById("feedback");
         feedback.textContent = message;
@@ -248,6 +255,7 @@ var game = function() {
     screenReset();
     
     var questionTitle = document.createElement("h2");
+    questionTitle.setAttribute("class", "heading");
     questionTitle.textContent = allQuestions[x].question;
     
     var mainContent = document.getElementById("main-content");
@@ -315,6 +323,8 @@ var game = function() {
 
 //TIMER COUNTDOWN FUNCTION
 function timeCounter(){
+    timerText.textContent = `Time: ${timer}`;
+     
     game();
     var countdown =setInterval(function(){
     
@@ -333,8 +343,9 @@ function timeCounter(){
             timerText.textContent = `Time: ${timer}`;
 
         } else {
-            timerText.textContent = `Time: ${timer}`;
             timer--;
+            timerText.textContent = `Time: ${timer}`;
+            
         }
     }, 1000);
 }
@@ -349,7 +360,7 @@ var startScreen = function() {
     finalScore = 0;
     gameEnded = false;
     gameExit = false;
-
+    timerText.textContent = `Time: ${timer}`; 
     document.getElementById("view-high-scores").addEventListener("click", highscoreDisplay);
     
 
@@ -361,6 +372,7 @@ var startScreen = function() {
     
     // setup start page heading
     var heading = document.createElement("h2");
+    heading.setAttribute("class","heading");
     heading.textContent = "Coding Quiz Challenge";
     // setup instructions text
     var instructions = document.createElement("p");
@@ -376,8 +388,8 @@ var startScreen = function() {
     mainContent.appendChild(startButton);  
     //ON BUTTON CLICK GOES TO GAME
     document.getElementById("start-button").addEventListener("click", timeCounter);
-    timer = 30;
-       
+    timer = 60;
+      
 };
 
 // FUNCTION CALL TO BEGIN APP
@@ -402,14 +414,16 @@ startScreen();
 //      * Submit button with even listener ✅
 //      * Save score/initials to local storage when submit clicked ✅
 // High Score Function
-//      * Recalls highscors/initials from local storage
-//      * Displays highscores/initials
+//      * Recalls highscores/initials from local storage ✅
+//      * Displays highscores/initials ✅
+
+// ADD REAL QUESTIONS!!!!! 
 
 // OPTIMIZATIONS IF TIME
-//      * Sort highscores in decending order
+//      * Sort highscores in decending order ✅
 //      * Add alert that user will leave game if view high score button clicked during gameplay
-//      * Allow only 3 characters for initials
-//      * Improve scoring system
+//      * Allow only 3 characters for initials ✅
+//      * Improve scoring system ✅
 //      * Visual improvements e.g. fade text between screens
-//      * Delete high scores button
+//      * Delete high scores button ✅
 //      * Randomize questions
