@@ -12,36 +12,33 @@
 ul {
     list-style: none;
 }
-
 /* END OF STYLE RESETS */
 
+/* MAIN HTML SECTION STYLES */
+/* contains banner, highscores button, timer */
 header {
     display:flex;
     justify-content: space-between;
-    /* padding: 30px 40px; */
     flex-wrap: wrap;
 }
-
 
 main {
     display:flex;
     justify-content: center;
     align-items: center;
-    /* background-color: beige; */
-    padding: 30px;
     flex-direction: column;    
 }
-
+/* div that displays the focal content of the game */
 .main-content {
-    /* background-color: azure; */
-    padding: 30px;
     width: 50%;
     min-width: 400px;
     text-align: center;
     order: 1;
 }
+/* END MAIN HTML SECTION STYLES */
 
-/* Title */
+/* INDIVIDUAL ELEMENT STYLES */
+/* Title Banner*/
 .quizify-title {
     width: 100%;
     font-size: 50px;
@@ -53,7 +50,7 @@ main {
     margin:0;
 }
 
-/* Heading h2 */
+/* Heading (h2 elements) */
 .heading {
     font-size: 30px;
 }
@@ -75,6 +72,36 @@ main {
     margin: 0;
 }
 
+/* answers */
+li {
+    border: black solid 2px;
+    padding: 10px;
+    margin: 5px;
+}
+li:hover {
+    background-color: bisque;
+}
+
+/* feedback text */
+.feedback {
+    order: 2;
+    color:darkgrey;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 10px 0 0 0;
+    border-top: darkgrey solid 2px;
+    width: 50%;
+    min-width: 400px;
+    padding: 5px 0 0 10px;
+}
+
+/* text box for entering name */
+#enter-name {
+    border: black 2px solid;
+    width: 60px;
+    margin: 0 10px 0 10px;
+}
+
 /* Start Button */
 #start-button {
     background-color: purple;
@@ -82,33 +109,11 @@ main {
     padding: 20px;
     border-radius: 5px;
 }
-
 #start-button:hover {
     background-color: green;
 }
 
-li {
-    border: black solid 2px;
-    padding: 10px;
-    margin: 5px;
-}
-
-li:hover {
-    background-color: bisque;
-}
-
-.feedback {
-    order: 2;
-    font-weight: bold;
-    font-size: 30px;
-}
-
-#enter-name {
-    border: black 2px solid;
-    width: 60px;
-    margin: 0 10px 0 10px;
-}
-
+/* other buttons */
 #submit-btn, #go-back-btn, #clear-scores-btn {
     background-color: purple;
     color: white;
@@ -117,27 +122,14 @@ li:hover {
     font-size: 20px;
     margin: 10px 10px;
 }
-
 #submit-btn:hover, #go-back-btn:hover {
     background-color: green;
 }
-
 #clear-scores-btn:hover {
     background-color: red;
 }
 
+/* text displaying user's final score */
 #final-score{
     font-size: 28px;
 }
-
-
-/* #game-over-msg-title{
-    order: 1;
-}
-#game-over-msg{
-    order: 2;
-}
-
-#score-form{
-    order: 4;
-} */
