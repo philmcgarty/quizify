@@ -1,5 +1,5 @@
 var questionAndAnswers1 = {
-    question: "What is the naming convetion for variables in JavaScript",
+    question: "What is the naming convention used for variables in JavaScript",
     ans1: ["Camel Case", "correct"],
     ans2: ["Donkey Case", "incorrect"],
     ans3: ["Cat Case", "incorrect"],
@@ -61,7 +61,7 @@ quizifyTitle.setAttribute("class","quizify-title");
 headerElement.appendChild(quizifyTitle);
 // setup highscores button in header
 var viewHighScores = document.createElement("p");
-viewHighScores.textContent = "View high scores";
+viewHighScores.textContent = "View High Scores";
 viewHighScores.setAttribute("id","view-high-scores")
 headerElement.appendChild(viewHighScores);
 // setup timer in header
@@ -111,7 +111,7 @@ var highscoreDisplay= function(){
     mainContent = document.getElementById("main-content")
     var highscoreTitle = document.createElement("h2");
     highscoreTitle.setAttribute("class","heading");
-    highscoreTitle.textContent = "Highscores";
+    highscoreTitle.textContent = "High Scores";
     mainContent.appendChild(highscoreTitle);
     
     // display scores
@@ -140,7 +140,7 @@ var highscoreDisplay= function(){
     
     // "Clear Scores" button
     var clearScoresBtn = document.createElement("button");
-    clearScoresBtn.textContent = "Clear highscores";
+    clearScoresBtn.textContent = "Clear High Scores";
     clearScoresBtn.setAttribute("id","clear-scores-btn");
     mainContent.appendChild(clearScoresBtn);
 
